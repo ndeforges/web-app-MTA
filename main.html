@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Main – Tour de France</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./assets/css/app.css" />
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex items-center">
+  <main class="max-w-4xl mx-auto p-6 w-full">
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl font-bold tracking-tight">Portail – Tour de France</h1>
+      <p class="text-slate-600 mt-1">Choisissez votre interface.</p>
+    </header>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Bouton JEUNES -->
+      <a href="./jeune.html"
+         class="group block aspect-square rounded-2xl border bg-white shadow-sm p-6 focus:outline-none focus:ring-4"
+         aria-label="Espace Jeunes">
+        <div class="h-full w-full flex flex-col items-center justify-center gap-4">
+          <div class="p-4 rounded-2xl border">
+            <i data-lucide="user" class="w-12 h-12"></i>
+          </div>
+          <div class="text-center">
+            <div class="text-xl font-semibold">Jeunes</div>
+            <div class="text-slate-500 text-sm">Saisir 3 villes + justification</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Bouton VALIDEUR -->
+      <a href="./valideur.html"
+         class="group block aspect-square rounded-2xl border bg-white shadow-sm p-6 focus:outline-none focus:ring-4"
+         aria-label="Espace Valideur">
+        <div class="h-full w-full flex flex-col items-center justify-center gap-4">
+          <div class="p-4 rounded-2xl border">
+            <i data-lucide="shield-check" class="w-12 h-12"></i>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <div class="text-xl font-semibold">Valideur</div>
+          <div class="text-slate-500 text-sm">Voir choix & valider affectations</div>
+        </div>
+      </a>
+    </section>
+
+    <footer class="mt-10 text-center text-sm text-slate-500">
+      Données locales (démo) — codes de test : <code>111-222</code>, <code>333-444</code>, <code>555-666</code>.
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
