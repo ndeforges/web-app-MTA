@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin – Tour de France</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/app.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-7xl mx-auto p-4 md:p-6">
+    <header class="mb-4">
+      <h1 class="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-3">
+        <i data-lucide="settings"></i>
+        Administration – Jeunes
+      </h1>
+      <p class="text-slate-600">Gérer tout le vivier (actifs, abandons, sédentaires), importer/exporter Excel.</p>
+    </header>
+
+    <section id="admin-stats" class="grid grid-cols-2 md:grid-cols-6 gap-3 mb-4"></section>
+
+    <section class="card mb-4">
+      <div class="card-title"><i data-lucide="filter"></i> Filtres & actions</div>
+      <div class="grid gap-3 md:grid-cols-12">
+        <input id="q" class="input md:col-span-3" placeholder="Rechercher nom…" />
+        <select id="f-pool" class="input md:col-span-2">
+          <option value="active">Actifs</option>
+          <option value="abandon">Abandon</option>
+          <option value="sedentaire">Sédentaire</option>
+        </select>
+        <select id="f-metier" class="input md:col-span-3">
+          <option value="ALL">Tous métiers</option>
+          <option value="ELECTROTECHNICIEN">Électrotechnicien</option>
+          <option value="MECANICIEN">Mécanicien</option>
+          <option value="MECANICIEN_OUTILLEUR">Mécanicien‑Outilleur</option>
+          <option value="MARECHAL_FERRAND">Maréchal‑Ferrand</option>
+        </select>
+        <select id="f-phase" class="input md:col-span-2">
+          <option value="ALL">Toutes phases</option>
+          <option value="FI">FI</option>
+          <option value="PB">PB</option>
+          <option value="PTDF">PTDF</option>
+          <option value="ASPIRANT">Aspirant</option>
+          <option value="COMPAGNON">Compagnon</option>
+        </select>
+        <div class="md:col-span-2 flex gap-2">
+          <button id="btn-export-xlsx" class="btn btn-outline"><i data-lucide="download"></i> Exporter</button>
+          <label class="btn btn-outline cursor-pointer"><i data-lucide="upload"></i> Importer
+            <input id="file-xlsx" type="file" accept=".xlsx,.xls,.csv" class="hidden" />
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title"><i data-lucide="users"></i> Jeunes</div>
+      <div id="admin-list" class="grid gap-3"></div>
+    </section>
+  </main>
+
+  <script src="./assets/js/store.js" defer></script>
+  <script src="./assets/js/admin.js" defer></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
