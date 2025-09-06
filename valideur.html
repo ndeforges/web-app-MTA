@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valideur – Tour de France</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./assets/css/app.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-6xl mx-auto p-4 md:p-6">
+    <header class="mb-4">
+      <h1 class="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-3">
+        <i data-lucide="check-square"></i>
+        Suivi & validations – Bénévole
+      </h1>
+      <p class="text-slate-600">Visualisez les choix des jeunes, lisez leur justification, et validez l'affectation sur un poste disponible.</p>
+    </header>
+
+    <section id="stats" class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4"></section>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <section class="md:col-span-2 card">
+        <div class="card-title"><i data-lucide="users"></i> Jeunes & choix soumis</div>
+        <div class="flex items-center gap-2 mb-3">
+          <input id="search" class="input w-64" placeholder="Rechercher par nom…" />
+          <select id="filtre" class="input w-48">
+            <option value="ALL">Tous</option>
+            <option value="SUB">Ayant soumis 3 choix</option>
+            <option value="NOSUB">Sans 3 choix</option>
+          </select>
+        </div>
+        <div id="liste" class="grid gap-3"></div>
+      </section>
+
+      <aside class="card">
+        <div class="card-title"><i data-lucide="building-2"></i> Villes & Capacités</div>
+        <div id="capacites" class="grid gap-2 mb-3"></div>
+        <div class="divider"></div>
+        <div class="grid gap-2">
+          <div class="font-medium">Actions rapides</div>
+          <button id="btn-add-ville" class="btn btn-outline"><i data-lucide="plus"></i> Ajouter une ville</button>
+          <button id="btn-export" class="btn btn-outline"><i data-lucide="download"></i> Exporter JSON</button>
+          <button id="btn-import" class="btn btn-outline"><i data-lucide="upload"></i> Importer JSON</button>
+          <textarea id="import-text" class="input min-h-[120px]" placeholder="Collez un JSON exporté…"></textarea>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="./assets/js/store.js" defer></script>
+  <script src="./assets/js/valideur.js" defer></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
