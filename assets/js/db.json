@@ -1,0 +1,73 @@
+{
+  "countries": [
+    { "id": "FR", "name": "France" },
+    { "id": "AU", "name": "Australie" }
+  ],
+  "cities": [
+    { "id": "paris",     "name": "Paris",     "countryId": "FR" },
+    { "id": "bordeaux",  "name": "Bordeaux",  "countryId": "FR" },
+    { "id": "toulouse",  "name": "Toulouse",  "countryId": "FR" },
+    { "id": "sydney",    "name": "Sydney",    "countryId": "AU" }
+  ],
+  "companies": [
+    { "id": "co-paris-mw",  "name": "Paris MétalWorks",      "cityId": "paris" },
+    { "id": "co-paris-ar",  "name": "Ateliers Réunis Paris", "cityId": "paris" },
+    { "id": "co-bdx-nav",   "name": "Navale Bordeaux",       "cityId": "bordeaux" },
+    { "id": "co-tlse-aero", "name": "Aéro Toulouse",         "cityId": "toulouse" }
+  ],
+  "posts": [
+    { "id": "p-paris-1", "companyId": "co-paris-mw",  "title": "Tourneur",    "slots": 2 },
+    { "id": "p-paris-2", "companyId": "co-paris-mw",  "title": "Fraiseur",    "slots": 1 },
+    { "id": "p-paris-3", "companyId": "co-paris-ar",  "title": "Soudeur",     "slots": 2 },
+    { "id": "p-bdx-1",   "companyId": "co-bdx-nav",   "title": "Chaudronnier","slots": 1 },
+    { "id": "p-tlse-1",  "companyId": "co-tlse-aero", "title": "Ajusteur",    "slots": 2 }
+  ],
+  "jeunes": [
+    {
+      "id": "j-alice",
+      "name": "Alice Martin",
+      "statut": "FI",
+      "diploma": "CAP",
+      "trainingDuration": 2,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "bordeaux", "toulouse"],
+      "justification": "",
+      "accessCode": "111-222",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": null
+    },
+    {
+      "id": "j-benoit",
+      "name": "Benoît Leroy",
+      "statut": "PB",
+      "diploma": "BAC Pro",
+      "trainingDuration": 3,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "toulouse", "bordeaux"],
+      "justification": "",
+      "accessCode": "333-444",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": null
+    },
+    {
+      "id": "j-camille",
+      "name": "Camille Dupont",
+      "statut": "PTDF",
+      "diploma": "BTS",
+      "trainingDuration": 2,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["sydney", "paris", "bordeaux"],
+      "justification": "",
+      "accessCode": "555-666",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": null
+    }
+  ],
+  "meta": { "version": 1, "generatedAt": "2025-09-06T00:00:00.000Z" }
+}
