@@ -75,14 +75,10 @@
     if (window.lucide?.createIcons) lucide.createIcons();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!window.TDF) {
-      alert(
-        `Erreur : store.js n'est pas chargé. Vérifiez le chemin ./assets/js/store.js.\n\nAstuce : servez les pages via http://localhost pour que le localStorage soit partagé.`
-      );
-      return;
-    }
-
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.TDF) { alert("Erreur: store.js non chargé"); return; }
+    await TDF.ready();              // ⬅️ attendre db.json + snapshot local
+  // ancien code d'init :
     renderLogin();
 
     const submit = () => {
