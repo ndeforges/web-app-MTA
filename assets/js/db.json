@@ -4,25 +4,64 @@
     { "id": "AU", "name": "Australie" }
   ],
   "cities": [
-    { "id": "paris",     "name": "Paris",     "countryId": "FR" },
-    { "id": "bordeaux",  "name": "Bordeaux",  "countryId": "FR" },
-    { "id": "toulouse",  "name": "Toulouse",  "countryId": "FR" },
-    { "id": "sydney",    "name": "Sydney",    "countryId": "AU" }
+    { "id": "paris",    "name": "Paris",    "countryId": "FR" },
+    { "id": "bordeaux", "name": "Bordeaux", "countryId": "FR" },
+    { "id": "toulouse", "name": "Toulouse", "countryId": "FR" },
+    { "id": "sydney",   "name": "Sydney",   "countryId": "AU" }
   ],
   "companies": [
-    { "id": "co-paris-mw",  "name": "Paris MétalWorks",      "cityId": "paris" },
-    { "id": "co-paris-ar",  "name": "Ateliers Réunis Paris", "cityId": "paris" },
-    { "id": "co-bdx-nav",   "name": "Navale Bordeaux",       "cityId": "bordeaux" },
-    { "id": "co-tlse-aero", "name": "Aéro Toulouse",         "cityId": "toulouse" }
+    { "id": "co-paris-mw",    "name": "Paris MétalWorks",        "cityId": "paris" },
+    { "id": "co-paris-ar",    "name": "Ateliers Réunis Paris",   "cityId": "paris" },
+    { "id": "co-bdx-nav",     "name": "Navale Bordeaux",         "cityId": "bordeaux" },
+    { "id": "co-tlse-aero",   "name": "Aéro Toulouse",           "cityId": "toulouse" },
+    { "id": "co-syd-foundry", "name": "Sydney Foundry",          "cityId": "sydney" }
   ],
   "posts": [
-    { "id": "p-paris-1", "companyId": "co-paris-mw",  "title": "Tourneur",    "slots": 2 },
-    { "id": "p-paris-2", "companyId": "co-paris-mw",  "title": "Fraiseur",    "slots": 1 },
-    { "id": "p-paris-3", "companyId": "co-paris-ar",  "title": "Soudeur",     "slots": 2 },
-    { "id": "p-bdx-1",   "companyId": "co-bdx-nav",   "title": "Chaudronnier","slots": 1 },
-    { "id": "p-tlse-1",  "companyId": "co-tlse-aero", "title": "Ajusteur",    "slots": 2 }
+    { "id": "p-paris-1", "companyId": "co-paris-mw",  "title": "Tourneur",     "slots": 2 },
+    { "id": "p-paris-2", "companyId": "co-paris-mw",  "title": "Fraiseur",     "slots": 1 },
+    { "id": "p-paris-3", "companyId": "co-paris-ar",  "title": "Soudeur",      "slots": 2 },
+    { "id": "p-bdx-1",   "companyId": "co-bdx-nav",   "title": "Chaudronnier", "slots": 1 },
+    { "id": "p-tlse-1",  "companyId": "co-tlse-aero", "title": "Ajusteur",     "slots": 2 },
+    { "id": "p-syd-1",   "companyId": "co-syd-foundry","title": "Fondeur",     "slots": 2 }
   ],
+
   "jeunes": [
+    {
+      "id": "j-alice",
+      "name": "Alice Martin",
+      "metier": "MECANICIEN",
+      "phase": { "type": "FI", "level": 2 },
+      "gache": null,
+      "diploma": "CAP",
+      "trainingDuration": 2,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "bordeaux", "toulouse"],
+      "justification": "Proximité famille à Bordeaux, intérêt pour l’aéronautique à Toulouse.",
+      "accessCode": "111-222",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": "2025-09-06T09:00:00.000Z",
+      "cityHistory": []
+    },
+    {
+      "id": "j-benoit",
+      "name": "Benoît Leroy",
+      "metier": "ELECTROTECHNICIEN",
+      "phase": { "type": "PB", "level": null },
+      "gache": null,
+      "diploma": "BAC Pro",
+      "trainingDuration": 3,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "toulouse", "bordeaux"],
+      "justification": "Souhait de poste en fraisage, entreprises à Paris.",
+      "accessCode": "333-444",
+      "assignment": { "cityId": "paris", "companyId": "co-paris-mw", "postId": "p-paris-2" },
+      "validated": true,
+      "dateSubmitted": "2025-09-05T14:30:00.000Z",
+      "cityHistory": [{ "year": 2024, "cityId": "paris" }]
+    },
     {
       "id": "j-camille",
       "name": "Camille Dupont",
@@ -58,45 +97,8 @@
       "validated": false,
       "dateSubmitted": "2025-09-06T11:00:00.000Z",
       "cityHistory": [{ "year": 2025, "cityId": "toulouse" }]
-    },
-    {
-      "id": "j-benoit",
-      "name": "Benoît Leroy",
-      "metier": "ELECTROTECHNICIEN",
-      "phase": { "type": "PB", "level": null },
-      "gache": null,
-      "diploma": "BAC Pro",
-      "trainingDuration": 3,
-      "trainingComplete": true,
-      "optsTour": true,
-      "choices": ["paris", "toulouse", "bordeaux"],
-      "justification": "Souhait de poste en fraisage, entreprises à Paris.",
-      "accessCode": "333-444",
-      "assignment": { "cityId": "paris", "companyId": "co-paris-mw", "postId": "p-paris-2" },
-      "validated": true,
-      "dateSubmitted": "2025-09-05T14:30:00.000Z",
-      "cityHistory": [{ "year": 2024, "cityId": "paris" }]
     }
-    {
-      "id": "j-alice",
-      "name": "Alice Martin",
-      "metier": "MECANICIEN",
-      "phase": { "type": "FI", "level": 2 },
-      "gache": null,
-      "diploma": "CAP",
-      "trainingDuration": 2,
-      "trainingComplete": true,
-      "optsTour": true,
-      "choices": ["paris", "bordeaux", "toulouse"],
-      "justification": "Proximité famille à Bordeaux, intérêt pour l’aéronautique à Toulouse.",
-      "accessCode": "111-222",
-      "assignment": null,
-      "validated": false,
-      "dateSubmitted": "2025-09-06T09:00:00.000Z",
-      "cityHistory": []
-    },
   ],
-
 
   "jeunesAbandon": [
     {
@@ -119,7 +121,8 @@
       "reason": "Changement de projet"
     }
   ],
-"jeunesSedentaires": [
+
+  "jeunesSedentaires": [
     {
       "id": "j-hugo",
       "name": "Hugo Bernard",
@@ -144,8 +147,9 @@
     }
   ],
 
-
-  
-  "meta": { "version": 1, "generatedAt": "2025-09-06T00:00:00.000Z" }
+  "meta": {
+    "version": 3,
+    "notes": "DB de démo compatible store.js v3 (pools actifs/abandon/sédentaire). Les affectations valident seulement les jeunes actifs.",
+    "generatedAt": "2025-09-06T00:00:00.000Z"
+  }
 }
-
