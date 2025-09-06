@@ -24,50 +24,128 @@
   ],
   "jeunes": [
     {
-      "id": "j-alice",
-      "name": "Alice Martin",
-      "statut": "FI",
-      "diploma": "CAP",
-      "trainingDuration": 2,
-      "trainingComplete": true,
-      "optsTour": true,
-      "choices": ["paris", "bordeaux", "toulouse"],
-      "justification": "",
-      "accessCode": "111-222",
-      "assignment": null,
-      "validated": false,
-      "dateSubmitted": null
-    },
-    {
-      "id": "j-benoit",
-      "name": "Benoît Leroy",
-      "statut": "PB",
-      "diploma": "BAC Pro",
-      "trainingDuration": 3,
-      "trainingComplete": true,
-      "optsTour": true,
-      "choices": ["paris", "toulouse", "bordeaux"],
-      "justification": "",
-      "accessCode": "333-444",
-      "assignment": null,
-      "validated": false,
-      "dateSubmitted": null
-    },
-    {
       "id": "j-camille",
       "name": "Camille Dupont",
-      "statut": "PTDF",
+      "metier": "MECANICIEN_OUTILLEUR",
+      "phase": { "type": "PTDF", "level": null },
+      "gache": null,
       "diploma": "BTS",
       "trainingDuration": 2,
       "trainingComplete": true,
       "optsTour": true,
       "choices": ["sydney", "paris", "bordeaux"],
-      "justification": "",
+      "justification": "Ouverture internationale en Australie.",
       "accessCode": "555-666",
       "assignment": null,
       "validated": false,
-      "dateSubmitted": null
+      "dateSubmitted": "2025-09-06T10:15:00.000Z",
+      "cityHistory": []
+    },
+    {
+      "id": "j-damien",
+      "name": "Damien Rousseau",
+      "metier": "MARECHAL_FERRAND",
+      "phase": { "type": "ASPIRANT", "level": 3 },
+      "gache": null,
+      "diploma": "CAP",
+      "trainingDuration": 2,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["toulouse", "paris", "bordeaux"],
+      "justification": "Souhaite atelier ferronnerie traditionnel.",
+      "accessCode": "777-888",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": "2025-09-06T11:00:00.000Z",
+      "cityHistory": [{ "year": 2025, "cityId": "toulouse" }]
+    },
+    {
+      "id": "j-benoit",
+      "name": "Benoît Leroy",
+      "metier": "ELECTROTECHNICIEN",
+      "phase": { "type": "PB", "level": null },
+      "gache": null,
+      "diploma": "BAC Pro",
+      "trainingDuration": 3,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "toulouse", "bordeaux"],
+      "justification": "Souhait de poste en fraisage, entreprises à Paris.",
+      "accessCode": "333-444",
+      "assignment": { "cityId": "paris", "companyId": "co-paris-mw", "postId": "p-paris-2" },
+      "validated": true,
+      "dateSubmitted": "2025-09-05T14:30:00.000Z",
+      "cityHistory": [{ "year": 2024, "cityId": "paris" }]
+    }
+    {
+      "id": "j-alice",
+      "name": "Alice Martin",
+      "metier": "MECANICIEN",
+      "phase": { "type": "FI", "level": 2 },
+      "gache": null,
+      "diploma": "CAP",
+      "trainingDuration": 2,
+      "trainingComplete": true,
+      "optsTour": true,
+      "choices": ["paris", "bordeaux", "toulouse"],
+      "justification": "Proximité famille à Bordeaux, intérêt pour l’aéronautique à Toulouse.",
+      "accessCode": "111-222",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": "2025-09-06T09:00:00.000Z",
+      "cityHistory": []
+    },
+  ],
+
+
+  "jeunesAbandon": [
+    {
+      "id": "j-nora",
+      "name": "Nora Petit",
+      "metier": "ELECTROTECHNICIEN",
+      "phase": { "type": "FI", "level": 1 },
+      "gache": null,
+      "diploma": "CAP",
+      "trainingDuration": 2,
+      "trainingComplete": false,
+      "optsTour": false,
+      "choices": [],
+      "justification": "",
+      "accessCode": "999-000",
+      "assignment": null,
+      "validated": false,
+      "dateSubmitted": null,
+      "cityHistory": [],
+      "reason": "Changement de projet"
     }
   ],
+"jeunesSedentaires": [
+    {
+      "id": "j-hugo",
+      "name": "Hugo Bernard",
+      "metier": "MECANICIEN",
+      "phase": { "type": "COMPAGNON", "level": 2 },
+      "gache": "MAITRE_STAGE",
+      "diploma": "BM",
+      "trainingDuration": 3,
+      "trainingComplete": true,
+      "optsTour": false,
+      "choices": ["bordeaux", "paris", "toulouse"],
+      "justification": "Installation en atelier école.",
+      "accessCode": "000-111",
+      "assignment": { "cityId": "bordeaux", "companyId": "co-bdx-nav", "postId": "p-bdx-1" },
+      "validated": true,
+      "dateSubmitted": "2024-06-01T09:00:00.000Z",
+      "cityHistory": [
+        { "year": 2022, "cityId": "paris" },
+        { "year": 2023, "cityId": "toulouse" },
+        { "year": 2024, "cityId": "bordeaux" }
+      ]
+    }
+  ],
+
+
+  
   "meta": { "version": 1, "generatedAt": "2025-09-06T00:00:00.000Z" }
 }
+
