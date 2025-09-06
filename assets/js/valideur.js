@@ -1,19 +1,33 @@
-// Interface VALIDEUR – v2 (compatible store.js + db.json)
+// Interface VALIDEUR – v3 (compatible store.js v3 + db.json v3)
 (function () {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
 
+  // ------- UI helpers -------
   function stat(icon, label, val) {
     return `<div class="stat"><div class="icon"><i data-lucide="${icon}" class="w-5 h-5"></i></div><div><div class="label">${label}</div><div class="value">${val}</div></div></div>`;
+  }
+
+  function phaseBadge(phase) {
+    if (!phase) return `<span class="badge">—</span>`;
+    const t = phase.type;
+    const lvl = phase.level ? ` ${phase.level}` : '';
+    const tone =
+      t === 'FI' ? 'background:#dbeafe;color:#1e3a8a' :
+      t === 'PB' ? 'background:#fde68a;color:#92400e' :
+      t === 'PTDF' ? 'background:#d1fae5;color:#065f46' :
+      t === 'ASPIRANT' ? 'background:#e0e7ff;color:#3730a3' :
+      t === 'COMPAGNON' ? 'background:#fee2e2;color:#991b1b' :
+      'background:#f1f5f9;color:#0f172a';
+    return `<span class="badge" style="${tone}">${t}${lvl}</span>`;
   }
 
   function renderStats() {
     const st = TDF.get();
     const idx = TDF.buildAssignmentIndex();
     const nbJeunes = (st.jeunes || []).length;
-    const nbSubmitted = (st.jeunes || []).filter((j) => j.choices?.length === 3).length;
+    const nbSubmitted = (st.jeunes || []).filter((j) => (j.choices || []).length === 3).length;
     const nbValidated = (st.jeunes || []).filter((j) => j.validated).length;
-
     const totalCap = (st.cities || [])
       .map((c) => TDF.cityCapacity(c, idx).total)
       .reduce((a, b) => a + b, 0);
@@ -31,17 +45,6 @@
     if (window.lucide?.createIcons) lucide.createIcons();
   }
 
-  function tagStatut(code) {
-    const tones = {
-      FI: 'background-color:#dbeafe;color:#1e3a8a',
-      PB: 'background-color:#fde68a;color:#92400e',
-      PTDF: 'background-color:#d1fae5;color:#065f46',
-    };
-    const label = { FI: 'Apprenti (FI)', PB: 'Post-Bac (PB)', PTDF: 'PTDF (déjà diplômé)' }[code] || code;
-    const tone = tones[code] || 'background-color:#f1f5f9;color:#0f172a';
-    return `<span class="badge" style="${tone}">${label}</span>`;
-  }
-
   function renderListe() {
     const st = TDF.get();
     const search = ($('#search')?.value || '').toLowerCase();
@@ -49,7 +52,7 @@
 
     const rows = (st.jeunes || [])
       .filter((j) => j.name.toLowerCase().includes(search))
-      .filter((j) => (fil === 'ALL' ? true : fil === 'SUB' ? j.choices?.length === 3 : j.choices?.length !== 3))
+      .filter((j) => (fil === 'ALL' ? true : fil === 'SUB' ? (j.choices || []).length === 3 : (j.choices || []).length !== 3))
       .map((j) => {
         const choices = (j.choices || [])
           .map((cid, i) => {
@@ -64,10 +67,10 @@
               <div>
                 <div class="font-medium">${j.name}</div>
                 <div class="text-sm text-slate-500 flex flex-wrap gap-2 items-center">
-                  ${tagStatut(j.statut)}
+                  ${phaseBadge(j.phase)}
                   <span class="badge">${j.diploma || '—'}</span>
-                  <span class="badge">${j.trainingDuration} ans</span>
-                  ${j.choices?.length === 3 ? '<span class="badge">3 choix soumis</span>' : '<span class="badge">incomplet</span>'}
+                  <span class="badge">${j.trainingDuration || '—'} ans</span>
+                  ${(j.choices || []).length === 3 ? '<span class="badge">3 choix soumis</span>' : '<span class="badge">incomplet</span>'}
                   ${j.validated ? '<span class="badge">validé</span>' : ''}
                 </div>
               </div>
@@ -89,6 +92,7 @@
     $('#liste').innerHTML = rows || `<div class="text-slate-500">Aucun résultat.</div>`;
     if (window.lucide?.createIcons) lucide.createIcons();
 
+    // actions
     $('#liste').querySelectorAll('[data-action="assign"]').forEach((btn) => btn.addEventListener('click', onAssignClick));
     $('#liste').querySelectorAll('[data-action="code"]').forEach((btn) => btn.addEventListener('click', onCodeClick));
   }
@@ -99,8 +103,8 @@
     const st = TDF.get();
     const j = (st.jeunes || []).find((x) => x.id === id);
     if (!j) return;
-    const newc = confirm(`Code actuel: ${j.accessCode}\n\nGénérer un nouveau code ?`);
-    if (newc) {
+    const regen = confirm(`Code actuel: ${j.accessCode || '—'}\n\nGénérer un nouveau code ?`);
+    if (regen) {
       TDF.generateCode(id);
       renderListe();
     }
@@ -183,7 +187,7 @@
 
     selCity.addEventListener('change', () => {
       const warn = container.querySelector('[data-warn="city"]');
-      if (!j.choices.includes(selCity.value) && selCity.value) warn.classList.remove('hidden');
+      if (!j.choices?.includes(selCity.value) && selCity.value) warn.classList.remove('hidden');
       else warn.classList.add('hidden');
       syncCompanies();
     });
@@ -195,7 +199,7 @@
     });
     container.querySelector('[data-action="validate"]').addEventListener('click', () => {
       if (!selCity.value || !selCo.value || !selPost.value) return alert('Sélections incomplètes');
-      if (!j.choices.includes(selCity.value)) return alert('Ville hors des 3 choix');
+      if (!j.choices?.includes(selCity.value)) return alert('Ville hors des 3 choix');
       TDF.validateAssignment(jeuneId, { cityId: selCity.value, companyId: selCo.value, postId: selPost.value });
       renderAll();
     });
@@ -216,7 +220,7 @@
       .join('');
     if (window.lucide?.createIcons) lucide.createIcons();
 
-    // + Entreprise (nouvelle API: companies à plat)
+    // + Entreprise (schéma v3 : companies à plat)
     $('#capacites')
       .querySelectorAll('[data-action="add-company"]')
       .forEach((b) =>
@@ -224,7 +228,7 @@
           const cityId = ev.currentTarget.dataset.city;
           const name = prompt("Nom de l'entreprise ?");
           if (!name) return;
-          const coId = `${cityId}-${Date.now().toString(36)}`; // id déterministe local
+          const coId = `${cityId}-${Date.now().toString(36)}`;
           TDF.addCompany(cityId, name, coId);
           const title = prompt('Premier poste (ex: Soudeur)');
           if (title) {
@@ -237,7 +241,7 @@
   }
 
   function wireSideActions() {
-    // ⚠️ addCity(countryId, name, id?)
+    // ⚠️ v3: addCity(countryId, name, id?)
     $('#btn-add-ville').addEventListener('click', () => {
       const countryId = prompt('Pays (ex: FR, AU) ?', 'FR') || 'FR';
       const name = prompt('Nom de la ville ?');
@@ -247,6 +251,7 @@
       renderAll();
     });
 
+    // Export / Import JSON (snapshot localStorage)
     $('#btn-export').addEventListener('click', () => {
       const blob = new Blob([JSON.stringify(TDF.get(), null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -262,7 +267,9 @@
       if (!txt) return;
       try {
         const parsed = JSON.parse(txt);
-        if (!parsed.cities || !parsed.jeunes) throw new Error('Format invalide');
+        // sécurité minimale : attendre les clés majeures
+        if (!parsed.cities || !parsed.jeunes || !parsed.companies || !parsed.posts) throw new Error('Format invalide (clés manquantes)');
+        // Remplace tout l'état par le JSON importé
         TDF.set(parsed);
         renderAll();
       } catch (e) {
@@ -279,13 +286,13 @@
 
   document.addEventListener('DOMContentLoaded', async () => {
     if (!window.TDF) {
-      alert("Erreur: store.js non chargé");
+      alert('Erreur: store.js non chargé');
       return;
     }
-    await TDF.ready(); // attendre db.json + snapshot
+    await TDF.ready(); // attendre db.json + snapshot local
     renderAll();
-    $('#search').addEventListener('input', renderListe);
-    $('#filtre').addEventListener('change', renderListe);
+    $('#search')?.addEventListener('input', renderListe);
+    $('#filtre')?.addEventListener('change', renderListe);
     wireSideActions();
   });
 })();
